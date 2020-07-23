@@ -5,6 +5,8 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import dev.felipemarinho.collaborator.api.entities.Collaborator;
@@ -30,5 +32,11 @@ public class CollaboratorServiceImpl implements CollaboratorService {
 		log.info("Persistindo o colaborador: {}", colaborador);
 		return collaboratorRepository.save(colaborador);
 	}
+
+	@Override
+	public Page<Collaborator> buscarColaboradores(PageRequest pageRequest) {
+		log.info("Busca dos colaborador paginada");
+		return this.collaboratorRepository.findAll(pageRequest);
+	}	
 
 }

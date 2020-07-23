@@ -3,6 +3,7 @@ package dev.felipemarinho.collaborator.api.services;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -12,6 +13,9 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ActiveProfiles;
 
 import dev.felipemarinho.collaborator.api.entities.Collaborator;
@@ -33,6 +37,7 @@ public class CollaboratorServiceTest {
 	public void setUp() throws Exception {
 		BDDMockito.given(this.collaboratorRepository.findById(Mockito.anyLong())).willReturn(Optional.of(new Collaborator()));
 		BDDMockito.given(this.collaboratorRepository.save(Mockito.any(Collaborator.class))).willReturn(new Collaborator());
+		BDDMockito.given(this.collaboratorRepository.findAll(Mockito.any(PageRequest.class))).willReturn(new PageImpl<Collaborator>(new ArrayList<Collaborator>()));
 	}
 	
 	@Test
@@ -45,6 +50,12 @@ public class CollaboratorServiceTest {
 	public void testCreateCollaborator() {
 		Collaborator collaborator = this.collaboratorService.persistir(new Collaborator());
 		assertNotNull(collaborator);
+	}
+	
+	@Test
+	public void testFindCollaboratorsPagenate() {
+		Page<Collaborator> colaboradores = this.collaboratorService.buscarColaboradores(PageRequest.of(0, 10));
+		assertNotNull(colaboradores);
 	}
 
 }
