@@ -1,5 +1,6 @@
 package dev.felipemarinho.collaborator.api.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import dev.felipemarinho.collaborator.api.entities.User;
@@ -19,5 +20,9 @@ public interface UserService {
 	 * @param id
 	 * @return Optional<User>
 	 */
-	Optional<User> buscarPorId(Long id); 
+	Optional<User> buscarPorId(Long id);
+
+	List<User> findAll(); 
+	
+	User save(User user);
 }

@@ -1,5 +1,6 @@
 package dev.felipemarinho.collaborator.api.services.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import dev.felipemarinho.collaborator.api.entities.User;
 import dev.felipemarinho.collaborator.api.repositories.UserRepository;
 import dev.felipemarinho.collaborator.api.services.UserService;
+import dev.felipemarinho.collaborator.api.utils.PasswordUtils;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -31,4 +33,18 @@ public class UserServiceImpl implements UserService {
 		return this.userRespository.findById(id);
 	}
 
+	@Override
+	public List<User> findAll() {
+		return userRespository.findAll();
+	}
+
+	@Override
+	public User save(User user) {
+		String bCryptPassword = PasswordUtils.buildBcrypt(user.getPassword());
+		user.setPassword(bCryptPassword);
+		return this.userRespository.save(user);
+	}
+
+	
+	
 }
