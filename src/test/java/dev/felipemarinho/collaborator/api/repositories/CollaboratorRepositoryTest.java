@@ -51,7 +51,7 @@ public class CollaboratorRepositoryTest {
 		collaborator.setTeam(TeamEnum.CHAPTER_FRONT_END);
 		collaborator.setRole(RoleEnum.ANALISTA_PLENO);
 		collaborator.setLocal("SQN 311");
-		collaborator.setExperiences(experiences);
+		collaborator.setProfessionalExperiences(experiences);
 		collaborator.setContacts(contacts);
 		
 		Collaborator collaboratorSaved = this.collaboratorRepository.save(collaborator);
@@ -61,7 +61,7 @@ public class CollaboratorRepositoryTest {
 		assertEquals(collaborator.getTeam(), collaboratorSaved.getTeam());
 		assertEquals(collaborator.getRole(), collaboratorSaved.getRole());
 		assertEquals(collaborator.getLocal(), collaboratorSaved.getLocal());
-		assertEquals(collaborator.getExperiences(), collaboratorSaved.getExperiences());
+		assertEquals(collaborator.getProfessionalExperiences(), collaboratorSaved.getProfessionalExperiences());
 		assertEquals(collaborator.getContacts(), collaboratorSaved.getContacts());
 	}
 
