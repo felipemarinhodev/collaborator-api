@@ -1,13 +1,14 @@
 package dev.felipemarinho.collaborator.api.services;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Optional;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 import org.mockito.BDDMockito;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class CollaboratorServiceTest {
 	
 	private static final Long ID = new Long(1);
 	
-	@BeforeEach
+	@Before
 	public void setUp() throws Exception {
 		BDDMockito.given(this.collaboratorRepository.findById(Mockito.anyLong())).willReturn(Optional.of(new Collaborator()));
 		BDDMockito.given(this.collaboratorRepository.save(Mockito.any(Collaborator.class))).willReturn(new Collaborator());

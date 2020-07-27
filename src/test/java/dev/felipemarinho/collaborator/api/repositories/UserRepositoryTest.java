@@ -1,10 +1,10 @@
 package dev.felipemarinho.collaborator.api.repositories;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -21,7 +21,7 @@ public class UserRepositoryTest {
 	@Autowired
 	private UserRepository userRepository;
 	
-	@BeforeEach
+	@Before
 	public void setUp() throws Exception {
 		User user = new User();
 		user.setEmail(EMAIL);
@@ -31,7 +31,7 @@ public class UserRepositoryTest {
 		this.userRepository.save(user);
 	}
 
-	@AfterEach
+	@After
 	public final void tearDown() {
 		this.userRepository.deleteAll();
 	}
