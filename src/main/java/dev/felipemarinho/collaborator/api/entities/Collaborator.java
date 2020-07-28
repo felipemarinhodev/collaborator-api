@@ -13,6 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -42,15 +43,17 @@ public class Collaborator implements Serializable{
 	private RoleEnum role;
 
 	@OneToMany(
-		mappedBy = "collaborator",
-		cascade = CascadeType.ALL,
-		fetch = FetchType.EAGER
-	)
+			cascade = CascadeType.ALL,
+			fetch = FetchType.EAGER,
+			orphanRemoval = true
+	    )
+    @JoinColumn(name = "collaborator_id", nullable = false)
 	private List<ProfessionalExperiences> professionalExperiences;
+	
 	@OneToMany(
 		mappedBy = "collaborator",
 		cascade = CascadeType.ALL,
-		fetch = FetchType.EAGER
+		fetch = FetchType.LAZY
 	)
 	private List<Contact> contacts;
 	@Column(name = "local", nullable = true)

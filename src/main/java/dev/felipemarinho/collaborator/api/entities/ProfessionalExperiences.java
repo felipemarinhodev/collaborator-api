@@ -5,10 +5,10 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -26,7 +26,7 @@ public class ProfessionalExperiences implements Serializable {
 	private Long id;
 	private String description;
 	private String skills;
-	private Collaborator collaborator;
+//	private Collaborator collaborator;
 	private Date createdAt;
 	private Date updatedAt;
 	
@@ -64,15 +64,14 @@ public class ProfessionalExperiences implements Serializable {
 		this.skills = skills;
 	}
 
-	@ManyToOne
-	@JoinColumn(name = "collaborator_id", referencedColumnName = "id", nullable = false)
-	public Collaborator getCollaborator() {
-		return collaborator;
-	}
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	public Collaborator getCollaborator() {
+//		return collaborator;
+//	}
 
-	public void setCollaborator(Collaborator collaborator) {
-		this.collaborator = collaborator;
-	}
+//	public void setCollaborator(Collaborator collaborator) {
+//		this.collaborator = collaborator;
+//	}
 
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
@@ -108,7 +107,7 @@ public class ProfessionalExperiences implements Serializable {
 	@Override
 	public String toString() {
 		return "ProfessionalExperiences [id=" + id + ", description=" + description + ", skills=" + skills
-				+ ", usuario=" + collaborator + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+				+ " createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
 	
 }
