@@ -109,6 +109,7 @@ public class CollaboratorDto {
 		collaboratorDto.setExperiences(collaborator.getProfessionalExperiences());
 		collaboratorDto.setContacts(collaborator.getContacts());
 		collaboratorDto.setLocal(collaborator.getLocal());
+		collaboratorDto.setId(collaborator.getId());
 		return collaboratorDto;
 	}
 
