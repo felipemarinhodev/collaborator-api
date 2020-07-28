@@ -24,7 +24,7 @@ import dev.felipemarinho.collaborator.api.services.CollaboratorService;
 
 @RestController
 @RequestMapping("/api/collaborator")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CollaboratorController {
 	
 	private static final Logger log = LoggerFactory.getLogger(CollaboratorController.class);
