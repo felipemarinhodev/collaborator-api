@@ -20,7 +20,7 @@ public class CollaboratorServiceImpl implements CollaboratorService {
 	
 	@Autowired
 	private CollaboratorRepository collaboratorRepository;
-
+	
 	@Override
 	public Optional<Collaborator> buscarPorId(Long id) {
 		log.info("Buscando um colaborador com o id {}", id);
