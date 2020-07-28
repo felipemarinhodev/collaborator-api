@@ -1,1 +1,1 @@
-#
+#Após baixar o projeto execute ```docker-compose -f postgresql.yml up -d``` para criar o banco de dados.

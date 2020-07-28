@@ -1,0 +1,9 @@
+version: '2'
+services:
+  collaborator-postgresql:
+    image: postgres:9.5
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=docker
+    ports:
+      - 5432:5432
