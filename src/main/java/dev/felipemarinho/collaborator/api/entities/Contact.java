@@ -26,7 +26,7 @@ public class Contact implements Serializable {
 	private Long id;
 	private String value;
 	private ContactEnum type;
-	private Collaborator collaborator;
+//	private Collaborator collaborator;
 	public Contact() {}
 	
 	@Id
@@ -55,15 +55,15 @@ public class Contact implements Serializable {
 		this.type = type;
 	}
 	
-	@ManyToOne
-	@JoinColumn(name = "collaborator_id", referencedColumnName = "id", nullable = false)
-	public Collaborator getCollaborator() {
-		return collaborator;
-	}
-
-	public void setCollaborator(Collaborator collaborator) {
-		this.collaborator = collaborator;
-	}
+//	@ManyToOne
+//	@JoinColumn(name = "collaborator_id", referencedColumnName = "id", nullable = false)
+//	public Collaborator getCollaborator() {
+//		return collaborator;
+//	}
+//
+//	public void setCollaborator(Collaborator collaborator) {
+//		this.collaborator = collaborator;
+//	}
 
 	@Override
 	public String toString() {

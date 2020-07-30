@@ -50,12 +50,13 @@ public class Collaborator implements Serializable{
     @JoinColumn(name = "collaborator_id", nullable = false)
 	private List<ProfessionalExperiences> professionalExperiences;
 	
-	@OneToMany(
-		mappedBy = "collaborator",
-		cascade = CascadeType.ALL,
-		fetch = FetchType.LAZY
-	)
-	private List<Contact> contacts;
+//	@OneToMany(
+//		cascade = CascadeType.ALL,
+//		fetch = FetchType.EAGER,
+//		orphanRemoval = true
+//	)
+//	@JoinColumn(name = "collaborator_id", nullable = false)
+//	private List<Contact> contacts;
 	@Column(name = "local", nullable = true)
 	private String local;
 	@Column(name = "created_at", nullable = false)
@@ -118,13 +119,13 @@ public class Collaborator implements Serializable{
 		this.professionalExperiences = professionalExperiences;
 	}
 
-	public List<Contact> getContacts() {
-		return contacts;
-	}
-
-	public void setContacts(List<Contact> contacts) {
-		this.contacts = contacts;
-	}
+//	public List<Contact> getContacts() {
+//		return contacts;
+//	}
+//
+//	public void setContacts(List<Contact> contacts) {
+//		this.contacts = contacts;
+//	}
 
 	public String getLocal() {
 		return local;
@@ -153,7 +154,7 @@ public class Collaborator implements Serializable{
 	@Override
 	public String toString() {
 		return "Collaborator [id=" + id + ", name=" + name + ", team=" + team + ", role=" + role + ", experiences="
-				+ professionalExperiences + ", contact=" + contacts + ", local=" + local + ", createdAt=" + createdAt
+				+ professionalExperiences + ", local=" + local + ", createdAt=" + createdAt
 				+ ", updatedAt=" + updatedAt + "]";
 	}
 
