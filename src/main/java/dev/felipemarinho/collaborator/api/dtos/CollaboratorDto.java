@@ -72,7 +72,7 @@ public class CollaboratorDto {
 		this.experiences = experiences;
 	}
 
-	@NotNull(message = "Informe pelo menos um contato")
+//	@NotNull(message = "Informe pelo menos um contato")
 	public List<Contact> getContacts() {
 		return contacts;
 	}
@@ -107,7 +107,7 @@ public class CollaboratorDto {
 		collaboratorDto.setTeam(collaborator.getTeam());
 		collaboratorDto.setRole(collaborator.getRole());
 		collaboratorDto.setExperiences(collaborator.getProfessionalExperiences());
-		collaboratorDto.setContacts(collaborator.getContacts());
+//		collaboratorDto.setContacts(collaborator.getContacts());
 		collaboratorDto.setLocal(collaborator.getLocal());
 		collaboratorDto.setId(collaborator.getId());
 		return collaboratorDto;
@@ -126,7 +126,7 @@ public class CollaboratorDto {
 		collaborator.setTeam(collaboradorDto.getTeam());
 		collaborator.setRole(collaboradorDto.getRole());
 		collaborator.setProfessionalExperiences(collaboradorDto.getExperiences());
-		collaborator.setContacts(collaboradorDto.getContacts());
+//		collaborator.setContacts(collaboradorDto.getContacts());
 		collaborator.setLocal(collaboradorDto.getLocal());
 		
 		return collaborator;
