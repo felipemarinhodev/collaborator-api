@@ -2,9 +2,13 @@ package dev.felipemarinho.collaborator.api.services;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.validation.BindingResult;
 
+import dev.felipemarinho.collaborator.api.dtos.CollaboratorDto;
 import dev.felipemarinho.collaborator.api.entities.Collaborator;
 
 public interface CollaboratorService {
@@ -32,4 +36,14 @@ public interface CollaboratorService {
 	 * @return Page<Collaborator>
 	 */
 	Page<Collaborator> buscarColaboradores(PageRequest pageRequest);
+
+	/**
+	 * Atualiza informações do colaborador. 
+	 * 
+	 * @param id
+	 * @param collaboradorDto
+	 * @param result 
+	 * @return Collaborator
+	 */
+	Collaborator atualizarCollaborador(Long id, @Valid CollaboratorDto collaboradorDto, BindingResult result);
 }

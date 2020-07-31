@@ -1,5 +1,7 @@
 package dev.felipemarinho.collaborator.api.controllers;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -11,7 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -77,7 +81,34 @@ public class CollaboratorController {
 		response.setData(collaboratorsDto);
 		return ResponseEntity.ok(response);
 	}
+ 
+	@GetMapping("/{id}")
+	public ResponseEntity<Response<CollaboratorDto>> getCollaborator(@PathVariable("id") Long id) {
+		log.info("Listando Colaborador {}", id);
+		Optional<Collaborator> collaboratorOptional = this.collaboratorService.buscarPorId(new Long(id));
+		Response<CollaboratorDto> response = new Response<CollaboratorDto>();
+		if (!collaboratorOptional.isPresent()) {
+			log.error("Não foi possível localizar o colaborador do id: {}", id);
+			return ResponseEntity.badRequest().body(response);
+		}
+		response.setData(CollaboratorDto.convertCollaboratorDto(collaboratorOptional.get()));
+		return ResponseEntity.ok(response); 
+	}
 
+	@PutMapping("/{id}")
+	public ResponseEntity<Response<CollaboratorDto>> updateCollaborator(@PathVariable("id") Long id, @Valid @RequestBody CollaboratorDto collaboradorDto, BindingResult result) {
+		log.info("Autalizando Colaborador {}", id);
+		log.info("Autalizando CollaboratorDTO {}", collaboradorDto);
+		Collaborator collaborator = this.collaboratorService.atualizarCollaborador(id, collaboradorDto, result);
+		Response<CollaboratorDto> response = new Response<CollaboratorDto>();
+//		if (!collaboratorOptional.isPresent()) {
+//			log.error("Não foi possível localizar o colaborador do id: {}", id);
+//			return ResponseEntity.badRequest().body(response);
+//		}
+		response.setData(CollaboratorDto.convertCollaboratorDto(collaborator));
+		return ResponseEntity.ok(response); 
+	}
+	
 	/**
 	 * Verifica se algo a respeito do colaborator que será inserido.
 	 * 
