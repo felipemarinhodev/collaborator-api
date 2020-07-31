@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -68,13 +69,13 @@ public class CollaboratorController {
 	
 	@GetMapping
 	public ResponseEntity<Response<Page<CollaboratorDto>>> index(
-			@RequestParam(value = "pag", defaultValue = "0") int pag,
+			@RequestParam(value = "page", defaultValue = "0") int page,
 			@RequestParam(value = "ord", defaultValue = "id") String ord,
 			@RequestParam(value = "dir", defaultValue = "DESC") String dir) {
 		log.info("Listando Colaborador");
 		Response<Page<CollaboratorDto>> response = new Response<Page<CollaboratorDto>>();
 
-		PageRequest pageRequest = PageRequest.of(pag, 6);
+		PageRequest pageRequest = PageRequest.of(page, 6);
 		Page<Collaborator> collaborators = this.collaboratorService.buscarColaboradores(pageRequest);
 		Page<CollaboratorDto> collaboratorsDto = collaborators.map(collaborator -> CollaboratorDto.convertCollaboratorDto(collaborator));
 		
@@ -96,17 +97,22 @@ public class CollaboratorController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Response<CollaboratorDto>> updateCollaborator(@PathVariable("id") Long id, @Valid @RequestBody CollaboratorDto collaboradorDto, BindingResult result) {
+	public ResponseEntity<Response<CollaboratorDto>> updateCollaborator(
+			@PathVariable("id") Long id,
+			@Valid @RequestBody CollaboratorDto collaboradorDto,
+			BindingResult result) {
 		log.info("Autalizando Colaborador {}", id);
 		log.info("Autalizando CollaboratorDTO {}", collaboradorDto);
 		Collaborator collaborator = this.collaboratorService.atualizarCollaborador(id, collaboradorDto, result);
 		Response<CollaboratorDto> response = new Response<CollaboratorDto>();
-//		if (!collaboratorOptional.isPresent()) {
-//			log.error("Não foi possível localizar o colaborador do id: {}", id);
-//			return ResponseEntity.badRequest().body(response);
-//		}
 		response.setData(CollaboratorDto.convertCollaboratorDto(collaborator));
 		return ResponseEntity.ok(response); 
+	}
+	
+	@DeleteMapping("/{id}")
+	public void deleteCollaborator(@PathVariable("id") Long id) {
+		log.info("Removendo Colaborador {}", id);
+		this.collaboratorService.removendoColaborador(id);
 	}
 	
 	/**

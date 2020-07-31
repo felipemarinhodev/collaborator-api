@@ -46,4 +46,9 @@ public interface CollaboratorService {
 	 * @return Collaborator
 	 */
 	Collaborator atualizarCollaborador(Long id, @Valid CollaboratorDto collaboradorDto, BindingResult result);
+
+	/**
+	 * Deleta as informações do colaborador
+	 */
+	void removendoColaborador(Long id);
 }

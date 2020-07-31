@@ -45,7 +45,7 @@ public class CollaboratorServiceImpl implements CollaboratorService {
 
 	@Override
 	public Collaborator atualizarCollaborador(Long id, @Valid CollaboratorDto collaboradorDto, BindingResult result) {
-		log.info("Atualiza dos colaborador");
+		log.info("Atualiza os dados do colaborador {}", id);
 		Optional<Collaborator> collaboratorOptional = collaboratorRepository.findById(id);
 		if (collaboratorOptional.isPresent()) {
 			Collaborator collaborator = CollaboratorDto.convertDtoForCollaborator(collaboradorDto, result);
@@ -55,6 +55,13 @@ public class CollaboratorServiceImpl implements CollaboratorService {
 			return collaboratorRepository.save(collaborator);
 		}
 		return null;
+	}
+
+	@Override
+	public void removendoColaborador(Long id) {
+		log.info("Removendo o colaborador {}", id);
+		collaboratorRepository.deleteById(id);
 	}	
 
+	
 }
